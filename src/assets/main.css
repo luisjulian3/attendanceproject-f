@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    color: #E8E8E8;
+    font-family: 'Quicksand', ' sans-serif';
+}
+.bg-layer {
+    @apply bg-slate-400;
+}
+
+.bg-layer-2{
+    @apply bg-[#00334E]
+}
+
+.bg-layer-3{
+    @apply bg-[#5588A3]
+}
+
+.bg-layer-4{
+    @apply bg-[#145374]
+}
+
+.text-1 {
+    @apply text-[20px]
+}
+
+.text-2 {
+    @apply text-[34px] font-bold
+}
+
+.text-3 {
+    @apply text-[18px] 
+}
+
+.text-4 {
+    @apply text-[30px] font-bold
+}
