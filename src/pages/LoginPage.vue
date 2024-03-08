@@ -21,12 +21,14 @@ const login = async () => {
 
     if (response.status === 200) {
       const token = response.data.token
+      const name = response.data.data.full_name
       VueCookies.set('token', token)
 
       const nikFromToken = authService.getNikFromToken()
 
       store.commit('setNik', nikFromToken)
       store.commit('setShouldShowLogin', false)
+      store.commit('setFullName', name)
 
       router.push('/dashboard')
     } else {
@@ -34,7 +36,6 @@ const login = async () => {
     }
   } catch (error) {
     errorMessage.value = 'An error occurred during login.'
-    console.error('An error occurred during login:', error)
   }
 }
 
@@ -45,13 +46,14 @@ const toggleLogin = () => {
 onMounted(() => {
   const isTokenValid = authService.isTokenValid()
   if (!isTokenValid) {
-    errorMessage.value = 'Your session has expired. Please log in again.'
+    errorMessage.value = ''
   }
 })
 </script>
 
 <template>
-  <div id="login-page" class="min-h-screen flex items-center justify-center bg-layer-2">
+  <div id="login-page" class="min-h-screen flex flex-col items-center justify-center bg-layer-2">
+    <div><img src="@/assets/icons/logopt.png" class="w-[210px] h-[210px] mb-8" /></div>
     <div class="bg-layer-3 p-8 rounded shadow-md w-96 h-96">
       <h2 class="text-2xl font-semibold mb-4">Login</h2>
       <form @submit.prevent="login" class="flex flex-col space-y-4">
@@ -62,7 +64,7 @@ onMounted(() => {
         <input type="password" v-model="password" required class="p-2 rounded border" />
 
         <button type="submit" @click="toggleLogin" class="bg-blue-600 text-white py-2 px-4 rounded">
-          Toggle Login
+          Login
         </button>
 
         <p v-if="errorMessage" class="text-red-500">{{ errorMessage }}</p>
@@ -72,5 +74,4 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* You can remove the scoped attribute for the Tailwind CSS part */
 </style>

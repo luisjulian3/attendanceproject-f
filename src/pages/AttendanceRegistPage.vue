@@ -13,7 +13,6 @@
             </p>
           </div>
           <div class="border-t border-gray-200 flex justify-center">
-            <!-- Camera layout moved here -->
             <div id="app" class="web-camera-container flex flex-col justify-center items-center">
               <div class="camera-button">
                 <button
@@ -83,10 +82,8 @@
                 </a>
               </div>
             </div>
-            <!-- End of Camera layout -->
           </div>
           <div class="flex justify-center my-2">
-            <!-- Centering the submit button -->
             <button @click="submitPhoto" class="button text-3 bg-layer-4 px-4 py-2 rounded-lg">
               Submit
             </button>
@@ -188,7 +185,7 @@ const downloadImage = () => {
 
 const submitPhoto = () => {
   const formData = new FormData()
-  formData.append('nik', nik) // Add the nik from the store
+  formData.append('nik', nik)
   console.log('nik from regist submit photo :', nik)
   const canvas = document.getElementById('photoTaken')
   const dataURL = canvas.toDataURL('image/jpeg')
@@ -202,9 +199,7 @@ const submitPhoto = () => {
     .then((response) => {
       if (response.ok) {
         console.log('Photo submitted successfully')
-        // Show success message
         errorMessage.value = 'Photo submitted successfully'
-        // Reset camera
         isCameraOpen.value = false
         isPhotoTaken.value = false
         isShotPhoto.value = false
@@ -212,27 +207,19 @@ const submitPhoto = () => {
         store.dispatch('setBindStatus', true)
       } else {
         console.error('Failed to submit photo')
-        // Show error message
         errorMessage.value = 'Failed to submit photo, please try again'
-        // Reset camera
         isCameraOpen.value = false
         isPhotoTaken.value = false
         isShotPhoto.value = false
         stopCameraStream()
-        // Handle the error
       }
     })
     .catch((error) => {
       console.error('Error submitting photo:', error)
-      // Show error message
       errorMessage.value = 'Error submitting photo'
-      // Reset camera
-      isPhotoTaken.value = false
-      // Handle the error
     })
 }
 
-// Helper function to convert dataURL to Blob
 const dataURLtoBlob = (dataURL) => {
   const byteString = atob(dataURL.split(',')[1])
   const mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0]
@@ -247,5 +234,4 @@ const dataURLtoBlob = (dataURL) => {
 </script>
 
 <style scoped>
-/* Your component styles */
 </style>

@@ -148,8 +148,7 @@
           </div>
           <div class="px-4 py-2 sm:px-6"></div>
         </div>
-
-        <div v-else class="mt-6">Loading...</div>
+        <div v-else class="mt-6">Belum ada proses absensi.</div>
       </div>
     </DashboardLayout>
   </div>
@@ -184,8 +183,7 @@ const getStatus = (presentStatus) => {
   } else if (presentStatus === 'AWT') {
     return 'Await'
   } else {
-    // Handle other cases if needed
-    return presentStatus // Return the original value if no match is found
+    return presentStatus
   }
 }
 
@@ -193,13 +191,12 @@ const getDayFromDate = (attendanceDate) => {
   // Create a new Date object from the attendance date string
   const dateObj = new Date(attendanceDate)
 
-  // Get the day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+  // Get the day of the week
   const dayOfWeek = dateObj.getDay()
 
   // Define an array of day names
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-  // Return the day name corresponding to the day of the week
   return days[dayOfWeek]
 }
 

@@ -8,8 +8,8 @@
         <div class="px-2 py-10 sm:px-6 lg:px-8">
           <div class="mt-2 bg-layer-3 shadow overflow-hidden rounded-lg">
             <div class="px-4 py-5 sm:px-6">
-              <h3 class="text-2 leading-6 font-medium">Personal Information</h3>
-              <p class="mt-1 max-w-2xl text-3">Basic personal details</p>
+              <h3 class="text-2 leading-6 font-medium">Search Employee</h3>
+              <p class="mt-1 max-w-2xl text-3">Update Employee Page</p>
             </div>
             <div class="border-t border-gray-200 flex justify-between items-center">
               <div class="flex-grow px-4 py-2">
@@ -163,7 +163,6 @@ if (!isAuthenticated) {
   router.push('/')
 }
 
-// Function to fetch data based on the search query
 const fetchData = async () => {
   try {
     const response = await axios.get(`http://127.0.0.1:8000/search?nik=${searchQuery.value}`)
@@ -174,22 +173,19 @@ const fetchData = async () => {
   }
 }
 
-// Function to handle search when searchQuery changes
 const handleSearch = () => {
   if (searchQuery.value.length >= 2) {
-    fetchData() // Call fetchData when searchQuery changes and meets the minimum length requirement
+    fetchData() 
   } else {
-    filteredResults.value = [] // Clear filteredResults if searchQuery is less than 2 characters
+    filteredResults.value = [] 
   }
 }
 
-// Function to populate search box with the clicked result's nik
-// Function to populate search box with the clicked result's nik
 const populateSearch = (result) => {
   searchQuery.value = result.nik
   handleSearch()
   setTimeout(() => {
-    filteredResults.value = [] // Clear filteredResults after a short delay
+    filteredResults.value = []
   }, 100)
 }
 
@@ -220,7 +216,6 @@ const handleDepartmentChange = (event) => {
 }
 
 const updateUserData = () => {
-  // Create an object with edited data
   const updatedData = {
     phone: editedPhone.value || userData.value.phone,
     email: editedBind.value || userData.value.email,
@@ -237,20 +232,16 @@ const updateUserData = () => {
     .post(`http://127.0.0.1:8000/update?nik=${nik}`, updatedData)
     .then((response) => {
       console.log('Data updated successfully:', response.data)
-      // Optionally, you can handle success response here (e.g., show a success message)
     })
     .catch((error) => {
       console.error('Error updating data:', error)
-      // Optionally, you can handle error response here (e.g., show an error message)
     })
 }
 
-// Watch for changes in searchQuery and trigger handleSearch
 watch(searchQuery, () => {
   handleSearch()
 })
 
-// Fetch data on component mount
 onMounted(() => {
   fetchData()
 })

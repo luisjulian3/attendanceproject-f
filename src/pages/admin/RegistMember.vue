@@ -8,8 +8,8 @@
         <div class="px-2 py-10 sm:px-6 lg:px-8">
           <div class="mt-2 bg-layer-3 shadow overflow-hidden rounded-lg">
             <div class="px-4 py-5 sm:px-6">
-              <h3 class="text-2 leading-6 font-bold">Personal Information</h3>
-              <p class="mt-1 max-w-2xl text-3">Basic personal details</p>
+              <h3 class="text-2 leading-6 font-bold">Registration</h3>
+              <p class="mt-1 max-w-2xl text-3">Registrasi for user</p>
             </div>
             <div class="border-t border-gray-200">
               <dl>
@@ -40,7 +40,7 @@
                       class="bg-layer-4 px-4 py-2 w-full rounded-md"
                       type="text"
                       id="phone"
-                      v-model="formData.full_name"
+                      v-model="formData.phone"
                       required
                     />
                   </div>
@@ -167,7 +167,6 @@ const formData = ref({
 })
 
 const submitForm = async () => {
-  // Check if any required field is empty
   if (
     !formData.value.nik ||
     !formData.value.full_name ||
@@ -189,8 +188,16 @@ const submitForm = async () => {
 
     if (response.status === 200) {
       console.log('Registration successful:', response.data.message)
-      // Display a success message
       errorMessage.value = 'Registration successful'
+      formData.value.nik = ''
+      formData.value.full_name = ''
+      formData.value.phone = ''
+      formData.value.date_of_birth = ''
+      formData.value.place_of_birth = ''
+      formData.value.email = ''
+      formData.value.password = ''
+      formData.value.role_id = null
+      formData.value.dept_id = null
     } else {
       console.error('Failed to register. Unexpected status:', response.status)
       errorMessage.value = 'Failed to register. Please try again.'
@@ -201,7 +208,6 @@ const submitForm = async () => {
       console.log('Error response data:', error.response.data)
       errorMessage.value = error.response.data.message
 
-      // Clear the form fields
       formData.value.nik = ''
       formData.value.full_name = ''
       formData.value.phone = ''
@@ -219,5 +225,4 @@ const submitForm = async () => {
 </script>
 
 <style scoped>
-/* Styles */
 </style>

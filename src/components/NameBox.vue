@@ -27,7 +27,8 @@ import { useStore } from 'vuex'
 const store = useStore()
 
 // Define a computed property to get the full name from the store
-const fullName = computed(() => store.state.fullname)
+const fullName = computed(() => store.state.full_name) // Corrected to store.state.full_name
+console.log(store.state.full_name)
 
 // Function to get real-time in the format HH:MM:SS
 const realTime = ref(getCurrentTime())

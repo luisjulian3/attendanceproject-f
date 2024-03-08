@@ -1,11 +1,9 @@
 <template>
   <div>
-    <!-- Sidebar -->
     <div class="bg-layer-2 p-4 flex flex-col h-full w-64 fixed top-0 left-0 z-10">
-      <!-- Your dashboard content goes here -->
       <div>
-        <h2 class="text-[40px] font-semibold mb-4 ml-14">XYZ</h2>
-        <!-- Add links or buttons for dashboard options -->
+        <img src="@/assets/icons/logopt.png" class="w-[100px] h-[100px] ml-14" />
+        <h2 class="text-[40px] font-semibold mb-4 ml-[70px]">XYZ</h2>
         <router-link
           :to="{ name: 'Home' }"
           class="flex items-center py-2 px-4 hover:bg-gray-600 rounded-lg"
@@ -70,7 +68,6 @@
           </svg>
           <p class="text-1 ml-4">Dashboard</p>
         </router-link>
-        <!-- Add more dashboard options as needed -->
         <router-link
           @click="checkBindStatus"
           :to="{ name: 'AttendancePage' }"
@@ -116,11 +113,9 @@
           <p class="text-1 ml-4">Attendance</p>
         </router-link>
       </div>
-
-      <!-- Logout button -->
       <button
         @click="logout"
-        class="flex items-center mt-[400px] py-2 px-4 bg-layer-4 rounded-lg hover:bg-gray-600 w-auto h-12"
+        class="flex items-center mt-[360px] py-2 px-4 bg-layer-4 rounded-lg hover:bg-gray-600 w-auto h-12"
       >
         <svg
           width="60"
@@ -171,10 +166,7 @@
         <p class="text-1 ml-4">Logout</p>
       </button>
     </div>
-
-    <!-- Main content -->
     <div class="ml-64 relative z-0">
-      <!-- Adjust margin-left to match the sidebar width -->
       <div class="">
         <slot></slot>
       </div>
@@ -192,19 +184,17 @@ import createPersistedState from 'vuex-persistedstate'
 
 const router = useRouter()
 
-// Get the Vuex store instance
 const store = useStore()
 
 const errorMessage = ref('')
 
-// Plugin to persist Vuex state
 createPersistedState({})(store)
 
 const bindStatus = computed(() => store.state.bind_status)
 
 const logout = () => {
-  VueCookies.remove('token') // Clear authentication token
-  router.push('/') // Redirect to the login page
+  VueCookies.remove('token')
+  router.push('/')
 }
 
 const checkBindStatus = () => {
@@ -227,9 +217,7 @@ const isRouteActive = (routeName) => {
 </script>
 
 <style scoped>
-/* Additional styles for the fixed top bar */
 body {
   margin: 0;
-  /* Remove default margin to prevent content from being pushed down */
 }
 </style>
