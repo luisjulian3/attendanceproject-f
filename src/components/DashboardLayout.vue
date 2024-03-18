@@ -190,12 +190,9 @@ const isRouteActive = (routeName) => {
 }
 
 watchEffect(() => {
-  // Periksa jika lebar layar lebih besar dari 768px
   if (window.innerWidth > 768) {
-    // Jika ya, maka sidebar diatur untuk ditampilkan secara default
     isSidebarOpen.value = true
   } else {
-    // Jika tidak, maka sidebar diatur untuk disembunyikan secara default
     isSidebarOpen.value = false
   }
 })
