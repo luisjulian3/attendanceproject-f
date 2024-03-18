@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-end mr-32">
+  <div class="flex justify-end">
     <!-- Box for real-time and real date -->
     <div class="bg-layer-3 shadow overflow-hidden rounded-lg mr-2 mt-4">
       <div class="mx-2">

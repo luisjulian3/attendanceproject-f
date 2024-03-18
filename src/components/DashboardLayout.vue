@@ -1,6 +1,19 @@
 <template>
   <div>
-    <div class="bg-layer-2 p-4 flex flex-col h-full w-64 fixed top-0 left-0 z-10">
+    <button @click="toggleSidebar" class="block lg:hidden fixed top-4 left-4 z-20">
+      <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16m-7 6h7"
+        ></path>
+      </svg>
+    </button>
+    <div
+      :class="{ hidden: !isSidebarOpen }"
+      class="bg-blue-200 p-4 flex flex-col h-full w-64 fixed top-0 left-0 z-10"
+    >
       <div>
         <img src="@/assets/icons/logopt.png" class="w-[100px] h-[100px] ml-14" />
         <h2 class="text-[40px] font-semibold mb-4 ml-[70px]">XYZ</h2>
@@ -124,50 +137,13 @@
           xmlns="http://www.w3.org/2000/svg"
           fill="#000000"
         >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-          <g id="SVGRepo_iconCarrier">
-            <title>ionicons-v5-o</title>
-            <path
-              d="M304,336v40a40,40,0,0,1-40,40H104a40,40,0,0,1-40-40V136a40,40,0,0,1,40-40H256c22.09,0,48,17.91,48,40v40"
-              style="
-                fill: none;
-                stroke: #e8e8e8;
-                stroke-linecap: round;
-                stroke-linejoin: round;
-                stroke-width: 32px;
-              "
-            ></path>
-            <polyline
-              points="368 336 448 256 368 176"
-              style="
-                fill: none;
-                stroke: #e8e8e8;
-                stroke-linecap: round;
-                stroke-linejoin: round;
-                stroke-width: 32px;
-              "
-            ></polyline>
-            <line
-              x1="176"
-              y1="256"
-              x2="432"
-              y2="256"
-              style="
-                fill: none;
-                stroke: #e8e8e8;
-                stroke-linecap: round;
-                stroke-linejoin: round;
-                stroke-width: 32px;
-              "
-            ></line>
-          </g>
+          <!-- Logout SVG icon -->
         </svg>
         <p class="text-1 ml-4">Logout</p>
       </button>
     </div>
-    <div class="ml-64 relative z-0">
-      <div class="">
+    <div :class="{ 'ml-64': isSidebarOpen }" class="relative z-0">
+      <div>
         <slot></slot>
       </div>
     </div>
@@ -179,18 +155,20 @@ import { useRouter } from 'vue-router'
 import VueCookies from 'vue-cookies'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import createPersistedState from 'vuex-persistedstate'
 
+const isSidebarOpen = ref(false)
 const router = useRouter()
-
 const store = useStore()
-
 const errorMessage = ref('')
-
 createPersistedState({})(store)
 
 const bindStatus = computed(() => store.state.bind_status)
+
+const toggleSidebar = () => {
+  isSidebarOpen.value = !isSidebarOpen.value
+}
 
 const logout = () => {
   VueCookies.remove('token')
@@ -199,25 +177,45 @@ const logout = () => {
 
 const checkBindStatus = () => {
   if (!bindStatus.value) {
-    // Show error component
     errorMessage.value = 'Bind status is false. Cannot access attendance page.'
     router.push('/home')
     console.log(errorMessage.value)
   } else {
-    // Navigate to the attendance page
     router.push('/attendance')
   }
 }
 
 const isRouteActive = (routeName) => {
-  console.log(router.currentRoute.value.name)
-  console.log(routeName)
   return router.currentRoute.value.name === routeName
 }
+
+watchEffect(() => {
+  // Periksa jika lebar layar lebih besar dari 768px
+  if (window.innerWidth > 768) {
+    // Jika ya, maka sidebar diatur untuk ditampilkan secara default
+    isSidebarOpen.value = true
+  } else {
+    // Jika tidak, maka sidebar diatur untuk disembunyikan secara default
+    isSidebarOpen.value = false
+  }
+})
 </script>
 
 <style scoped>
 body {
   margin: 0;
+}
+
+@media (max-width: 768px) {
+  .bg-layer-2 {
+    width: 0;
+    transition: width 0.3s ease;
+  }
+  .ml-64 {
+    margin-left: 0;
+  }
+  .hidden {
+    display: none;
+  }
 }
 </style>

@@ -175,9 +175,9 @@ const fetchData = async () => {
 
 const handleSearch = () => {
   if (searchQuery.value.length >= 2) {
-    fetchData() 
+    fetchData()
   } else {
-    filteredResults.value = [] 
+    filteredResults.value = []
   }
 }
 
