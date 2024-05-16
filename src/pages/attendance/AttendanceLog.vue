@@ -73,8 +73,8 @@ const fetchAttendanceLogs = async () => {
     const response = await axios.get(
       `http://127.0.0.1:8000/attendance-logs/?nik=${store.state.nik}`
     )
-    console.log('Response:', response.data.data) // Access data key
-    attendanceLogs.value = response.data.data // Access data key
+    console.log('Response:', response.data.data)
+    attendanceLogs.value = response.data.data 
   } catch (error) {
     console.error('Error fetching attendance logs:', error)
   }
@@ -84,5 +84,4 @@ onMounted(fetchAttendanceLogs)
 </script>
 
 <style scoped>
-/* Add your custom scrollbar styles here */
 </style>

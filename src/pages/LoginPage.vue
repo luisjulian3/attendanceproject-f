@@ -14,7 +14,7 @@ const errorMessage = ref('')
 
 const login = async () => {
   try {
-    const response = await axios.post('http://127.0.0.1:8000/logintest/', {
+    const response = await axios.post('http://192.168.42.154:8000/logintest/', {
       nik: nik.value,
       password: password.value
     })
@@ -58,20 +58,17 @@ onMounted(() => {
       <h2 class="text-2xl font-semibold mb-4">Login</h2>
       <form @submit.prevent="login" class="flex flex-col space-y-4">
         <label for="nik" class="text-white">NIK:</label>
-        <input type="text" v-model="nik" required class="p-2 rounded border" />
+        <input type="text" v-model="nik" required class="p-2 rounded border text-black" />
 
         <label for="password" class="text-white">Password:</label>
-        <input type="password" v-model="password" required class="p-2 rounded border" />
+        <input type="password" v-model="password" required class="p-2 rounded border text-black" />
 
         <button type="submit" @click="toggleLogin" class="bg-blue-600 text-white py-2 px-4 rounded">
           Login
         </button>
-
-        <p v-if="errorMessage" class="text-red-500">{{ errorMessage }}</p>
       </form>
     </div>
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -138,9 +138,9 @@ const filteredAttendanceLogs = computed(() => {
   if (!searchNIK.value) {
     return attendanceLogs.value
   } else {
-    const searchValue = searchNIK.value.toString().toLowerCase() // Convert to string
+    const searchValue = searchNIK.value.toString().toLowerCase()
     return attendanceLogs.value.filter((log) => {
-      const nik = log.nik.toString().toLowerCase() // Convert to string
+      const nik = log.nik.toString().toLowerCase()
       return nik.includes(searchValue)
     })
   }
@@ -153,23 +153,17 @@ const fetchAttendanceLogsByNIK = async () => {
 const downloadCSV = () => {
   const csvContent = generateCSVContent(attendanceLogs.value)
 
-  // Create a Blob containing the CSV data
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
 
-  // Create a temporary anchor element
   const link = document.createElement('a')
   link.href = window.URL.createObjectURL(blob)
 
-  // Set the filename for the download
   link.download = 'attendance_logs.csv'
 
-  // Append the anchor element to the document
   document.body.appendChild(link)
 
-  // Trigger a click on the anchor element to start the download
   link.click()
 
-  // Remove the anchor element from the document
   document.body.removeChild(link)
 }
 
@@ -184,7 +178,6 @@ const generateCSVContent = (data) => {
     'Location'
   ]
 
-  // Convert data to CSV format
   const csvRows = [header.join(',')]
   data.forEach((log) => {
     const values = [
@@ -205,6 +198,4 @@ const generateCSVContent = (data) => {
 onMounted(fetchAttendanceLogs)
 </script>
 
-<style scoped>
-/* Add your custom scrollbar styles here */
-</style>
+<style scoped></style>

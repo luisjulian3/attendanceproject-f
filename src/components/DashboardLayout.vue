@@ -12,7 +12,7 @@
     </button>
     <div
       :class="{ hidden: !isSidebarOpen }"
-      class="bg-blue-200 p-4 flex flex-col h-full w-64 fixed top-0 left-0 z-10"
+      class="bg-layer-2 p-4 flex flex-col h-full w-64 fixed top-0 left-0 z-10"
     >
       <div>
         <img src="@/assets/icons/logopt.png" class="w-[100px] h-[100px] ml-14" />
@@ -137,7 +137,6 @@
           xmlns="http://www.w3.org/2000/svg"
           fill="#000000"
         >
-          <!-- Logout SVG icon -->
         </svg>
         <p class="text-1 ml-4">Logout</p>
       </button>

@@ -6,7 +6,6 @@
       </div>
       <div class="px-2 py-10 sm:px-6 lg:px-8">
         <div v-if="userData" class="mt-2 bg-layer-3 shadow overflow-hidden rounded-lg">
-          <!-- Personal Information Section -->
           <div class="px-4 py-5 sm:px-6">
             <div class="flex flex-wrap">
               <svg
@@ -49,7 +48,6 @@
           <div class="px-4 py-2 sm:px-6"></div>
         </div>
         <div v-if="userData" class="mt-10 bg-layer-3 shadow overflow-hidden rounded-lg">
-          <!-- Employee Last Attendance Section -->
           <div class="px-4 py-5 sm:px-6">
             <div class="flex items-center">
               <svg
@@ -107,7 +105,6 @@
           </div>
         </div>
         <div v-if="userData" class="mt-10 bg-layer-3 shadow overflow-hidden rounded-lg">
-          <!-- Information Section -->
           <div class="px-4 py-5 sm:px-6">
             <div class="flex flex-wrap">
               <svg
@@ -127,7 +124,6 @@
           </div>
           <div class="border-t border-gray-200 px-4 py-4 sm:px-6">
             <div class="flex items-center ml-10">
-              <!-- Warning Icon -->
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-6 w-6 text-yellow-500 mr-2"
@@ -142,7 +138,6 @@
                   d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.22-1.95 1.165-3.04L13.165 4.96c-1.056-1.09-2.916-1.09-3.972 0L2.835 15.96c-1.054 1.09-.375 3.04 1.165 3.04z"
                 />
               </svg>
-              <!-- Message -->
               <p>{{ message }}</p>
             </div>
           </div>
@@ -188,13 +183,10 @@ const getStatus = (presentStatus) => {
 }
 
 const getDayFromDate = (attendanceDate) => {
-  // Create a new Date object from the attendance date string
   const dateObj = new Date(attendanceDate)
 
-  // Get the day of the week
   const dayOfWeek = dateObj.getDay()
 
-  // Define an array of day names
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
   return days[dayOfWeek]

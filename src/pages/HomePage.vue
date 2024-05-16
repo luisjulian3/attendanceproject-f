@@ -8,11 +8,9 @@
         <div
           class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 mx-auto my-auto mt-10"
         >
-          <!-- Menu items go here -->
           <MenuItem title="Profile" icon="profile" path="/profile" />
           <MenuItem title="Attendance" icon="calendar" @click="checkBindStatus" />
           <MenuItem title="Attendance Register" icon="facerecognition" path="/attendregist" />
-          <!-- Use flags to conditionally render menu items -->
           <MenuItem
             v-if="registerEmployeeFlag"
             title="Register Member"
@@ -58,10 +56,8 @@ import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import createPersistedState from 'vuex-persistedstate'
 
-// Get router instance
 const router = useRouter()
 
-// Get the Vuex store instance
 const store = useStore()
 
 const errorMessage = ref('')
@@ -75,12 +71,10 @@ const bindStatus = computed(() => store.state.bind_status)
 
 const checkBindStatus = () => {
   if (!bindStatus.value) {
-    // Show error component
     errorMessage.value = 'Bind status is false. Cannot access attendance page.'
     router.push('/home')
     console.log(errorMessage.value)
   } else {
-    // Navigate to the attendance page
     router.push('/attendance')
   }
 }
@@ -114,5 +108,4 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-/* Add any additional styles for the menu items or adjust based on your needs */
 </style>

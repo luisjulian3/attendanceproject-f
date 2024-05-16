@@ -28,7 +28,6 @@
                 Search
               </button>
             </div>
-            <!-- Filtered Results -->
             <div v-if="filteredResults.length === 0" class="px-4 py-2"></div>
             <div v-else>
               <div
@@ -37,13 +36,11 @@
                 class="px-6 py-2 border bg-slate mx-4 m-2 rounded-md bg-layer-4"
                 @click="populateSearch(result)"
               >
-                <!-- Display filtered results here -->
                 {{ result.full_name }} - {{ result.nik }}
               </div>
             </div>
           </div>
         </div>
-        <!-- Profile Information -->
         <div v-if="userData" class="pb-10 px-2 sm:px-6 lg:px-8">
           <div class="mt-2 bg-layer-3 shadow overflow-hidden rounded-lg">
             <div class="px-4 py-5 sm:px-6">

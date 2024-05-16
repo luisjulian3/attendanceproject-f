@@ -233,5 +233,4 @@ const dataURLtoBlob = (dataURL) => {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

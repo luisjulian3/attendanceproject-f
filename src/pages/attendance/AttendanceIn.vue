@@ -13,7 +13,6 @@
             </p>
           </div>
           <div class="border-t border-gray-200 flex justify-center">
-            <!-- Camera layout moved here -->
             <div id="app" class="web-camera-container flex flex-col justify-center items-center">
               <div class="camera-button">
                 <button
@@ -83,10 +82,8 @@
                 </a>
               </div>
             </div>
-            <!-- End of Camera layout -->
           </div>
           <div class="flex justify-center my-2">
-            <!-- Centering the submit button -->
             <button @click="submitAttendance" class="button text-3 bg-layer-4 px-4 py-2 rounded-lg">
               Submit
             </button>
@@ -127,7 +124,6 @@ const toggleCamera = () => {
     isPhotoTaken.value = false
     isShotPhoto.value = false
     stopCameraStream()
-    // Clear any existing face detection canvas
     const canvas = document.querySelector('canvas')
     if (canvas) {
       canvas.remove()
@@ -211,29 +207,20 @@ if (!isAuthenticated) {
 
 const submitAttendance = async () => {
   try {
-    // Check if latitude and longitude are available
     if (latitude.value !== null && longitude.value !== null) {
-      // Convert image data to a Blob object
       const canvas = document.getElementById('photoTaken')
       const imageFile = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg'))
-
-      // Replace '872613' with the actual value of the nik parameter
-
-      // Create FormData object and append image, nik, latitude, and longitude
       const formData = new FormData()
       formData.append('image', imageFile)
       formData.append('nik', nik)
       formData.append('latitude', latitude.value)
       formData.append('longitude', longitude.value)
-
-      // Make POST request to the API endpoint
       const response = await fetch('http://127.0.0.1:8000/attendancein/', {
         method: 'POST',
         body: formData
       })
 
       if (response.ok) {
-        // Handle successful response
         const data = await response.json()
         errorMessage.value = data.message
         isCameraOpen.value = false
@@ -241,10 +228,8 @@ const submitAttendance = async () => {
         isShotPhoto.value = false
         stopCameraStream()
       } else {
-        // Handle error response
         const errorData = await response.json()
         console.error('Error:', errorData.message)
-        // Set error message to display in the view
         errorMessage.value = errorData.message
         isCameraOpen.value = false
         isPhotoTaken.value = false
@@ -256,15 +241,12 @@ const submitAttendance = async () => {
     }
   } catch (error) {
     console.error('Error:', error.message)
-    // Set error message to display in the view
     errorMessage.value = 'An error occurred while submitting attendance.'
   }
 }
 
-// Get user's location when the component is mounted
 onMounted(() => {
   if (navigator.geolocation) {
-    // Initially get the current position
     navigator.geolocation.getCurrentPosition(
       (position) => {
         latitude.value = position.coords.latitude
@@ -277,7 +259,6 @@ onMounted(() => {
       }
     )
 
-    // Watch for changes in geolocation continuously
     watchEffect(() => {
       const watchId = navigator.geolocation.watchPosition(
         (position) => {
@@ -289,7 +270,6 @@ onMounted(() => {
         }
       )
 
-      // Stop watching when the component is unmounted
       return () => {
         navigator.geolocation.clearWatch(watchId)
       }

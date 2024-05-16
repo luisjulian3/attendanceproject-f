@@ -23,7 +23,6 @@ const { emit } = getCurrentInstance()
 
 const confirm = () => {
   show.value = false
-  // Emit a custom event to notify the parent component
   emit('confirmed')
 }
 

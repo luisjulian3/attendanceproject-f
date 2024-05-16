@@ -8,7 +8,6 @@
         <div
           class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 mx-auto my-auto mt-10"
         >
-          <!-- Menu items go here -->
           <MenuItem title="Attendance IN" icon="circle-in" path="/attendance/in" />
           <MenuItem title="Attendance Out" icon="circle-out" path="/attendance/out" />
           <MenuItem title="Attendance Log" icon="log" path="/attendance/log" />
@@ -34,6 +33,4 @@ if (!isAuthenticated) {
 }
 </script>
 
-<style scoped>
-/* Add any additional styles for the menu items or adjust based on your needs */
-</style>
+<style scoped></style>
